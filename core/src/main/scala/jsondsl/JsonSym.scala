@@ -13,6 +13,13 @@ trait JsonSym[F[_], Json] {
   def obj(ps: (String, F[Json])*): F[Json]
 
   def arr(vs: F[Json]*): F[Json]
+
+  implicit def stringToStr(s: String): F[Json] = str(s)
+  implicit def intToNum(i: Int): F[Json] = num(i)
+  implicit def longToNum(l: Long): F[Json] = num(l)
+  implicit def floatToNum(f: Float): F[Json] = num(f)
+  implicit def doubleToNum(d: Double): F[Json] = num(d)
+  implicit def bigDecimalToNum(b: BigDecimal): F[Json] = num(b)
 }
 
 object JsonSym {
