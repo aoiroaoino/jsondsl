@@ -12,9 +12,15 @@ lazy val commonSettings = Seq(
 
 lazy val root = (project in file("."))
   .settings(commonSettings)
-  .aggregate(core)
-  .dependsOn(core)
+  .aggregate(core, playJson)
+  .dependsOn(core, playJson)
 
 lazy val core = project
   .settings(commonSettings)
   .settings(moduleName := "jsondsl-core")
+
+lazy val playJson = project
+  .settings(commonSettings)
+  .settings(moduleName := "jsondsl-play-json")
+  .settings(libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.7")
+  .dependsOn(core)
