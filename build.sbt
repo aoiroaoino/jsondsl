@@ -12,8 +12,8 @@ lazy val commonSettings = Seq(
 
 lazy val root = (project in file("."))
   .settings(commonSettings)
-  .aggregate(core, playJson)
-  .dependsOn(core, playJson)
+  .aggregate(core, playJson, circe)
+  .dependsOn(core, playJson, circe)
 
 lazy val core = project
   .settings(commonSettings)
@@ -23,4 +23,10 @@ lazy val playJson = project
   .settings(commonSettings)
   .settings(moduleName := "jsondsl-play-json")
   .settings(libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.7")
+  .dependsOn(core)
+
+lazy val circe = project
+  .settings(commonSettings)
+  .settings(moduleName := "jsondsl-circe")
+  .settings(libraryDependencies += "io.circe" %% "circe-core" % "0.9.3")
   .dependsOn(core)
