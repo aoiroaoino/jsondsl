@@ -23,10 +23,10 @@ lazy val playJson = project
   .settings(commonSettings)
   .settings(moduleName := "jsondsl-play-json")
   .settings(libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.7")
-  .dependsOn(core)
+  .dependsOn(core % "compile->compile;test->test")
 
 lazy val circe = project
   .settings(commonSettings)
   .settings(moduleName := "jsondsl-circe")
   .settings(libraryDependencies += "io.circe" %% "circe-core" % "0.9.3")
-  .dependsOn(core)
+  .dependsOn(core % "compile->compile;test->test")
